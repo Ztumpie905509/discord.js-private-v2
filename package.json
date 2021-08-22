@@ -1,0 +1,23 @@
+{
+  "name": "discord.js-private-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "discord.js": "^13.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ztumpie905509/discord.js-private-v2.git"
+  },
+  "author": "Ztumpie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ztumpie905509/discord.js-private-v2/issues"
+  },
+  "homepage": "https://github.com/Ztumpie905509/discord.js-private-v2#readme"
+}
