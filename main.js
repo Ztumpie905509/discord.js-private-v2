@@ -1,5 +1,5 @@
-const Discord = require("discord.js");
-const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS] });
+const { Client, Intents } = require("discord.js");
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.on("ready", () => {
   console.log("This bot is ready");
