@@ -76,7 +76,7 @@ class voiceMember {
     }
     sendEmbed(embed) {
         this.client.guilds.fetch(this.guildID).then((guild) => {
-            guild.channels.cache.get('889356389930131466').send({ embeds: [embed]});
+            guild.channels.cache.get('878928621148966932').send({ embeds: [embed]});
         });
     }
     toggleBoolean(x) {

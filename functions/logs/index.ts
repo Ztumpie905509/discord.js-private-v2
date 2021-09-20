@@ -92,7 +92,7 @@ class voiceMember {
 	}
 	sendEmbed(embed: MessageEmbed) {
 		this.client.guilds.fetch(this.guildID).then((guild:any) => {
-			guild.channels.cache.get('889356389930131466').send({ embeds: [embed]})
+			guild.channels.cache.get('878928621148966932').send({ embeds: [embed]})
 		})
 	}
 	toggleBoolean(x:boolean) {
