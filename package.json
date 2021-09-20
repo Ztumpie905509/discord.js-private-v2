@@ -13,6 +13,10 @@
   },
   "author": "Ztumpie",
   "license": "MIT",
+  "engines": {
+    "node": "16.9.1",
+    "npm": "7.21.1"
+  },
   "bugs": {
     "url": "https://github.com/Ztumpie905509/discord.js-private-v2/issues"
   },
