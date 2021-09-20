@@ -1,91 +1,58 @@
-const { Client } = require("discord.js");
-const client = new Client();
-
-client.on("ready", () => {
-  console.log("This bot is ready");
+import { Client, Intents } from 'discord.js';
+import { voiceMember } from "./functions/logs/index.js"
+const client = new Client({ intents: Object.values(Intents.FLAGS) });
+const updateStateCode = {
+    selfMute: 1,
+    selfDeaf: 2,
+    serverMute: 3,
+    serverDeaf: 4,
+    streaming: 5
+}
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
 });
-
-client.on("voiceStateUpdate", (oldMember, newMember) => {
-  var newUserChannel = newMember.voiceChannel;
-  var oldUserChannel = oldMember.voiceChannel;
-  if (
-    oldUserChannel !== undefined &&
-    newUserChannel !== undefined &&
-    newUserChannel === oldUserChannel
-  ) {
-    if (newMember.selfStream || oldMember.selfStream) return;
-    client.channels
-      .find((x) => {
-        return x.name === "logs";
-      })
-      .send({
-        embed: {
-          color: 16766720,
-          description: "Someone toggled his/her voice status.",
-          fields: [
-            {
-              name: `${newMember.user.username}`,
-              value: `was being (un)muted/(un)deafened`,
-            },
-          ],
-          timestamp: new Date(),
-        },
-      });
-  } else if (oldUserChannel === undefined && newUserChannel !== undefined) {
-    client.channels
-      .find((x) => {
-        return x.name === "logs";
-      })
-      .send({
-        embed: {
-          color: 3066993,
-          description: "Someone joined a voice channel",
-          fields: [
-            {
-              name: `${newMember.user.username}`,
-              value: `has joined ${newUserChannel.name}`,
-            },
-          ],
-          timestamp: new Date(),
-        },
-      });
-  } else if (newUserChannel === undefined && oldUserChannel !== undefined) {
-    client.channels
-      .find((x) => {
-        return x.name === "logs";
-      })
-      .send({
-        embed: {
-          color: 15158332,
-          description: "Someone left a voice channel",
-          fields: [
-            {
-              name: `${oldMember.user.username}`,
-              value: `has left ${oldUserChannel.name}`,
-            },
-          ],
-          timestamp: new Date(),
-        },
-      });
-  } else if (newUserChannel !== undefined && oldUserChannel !== undefined) {
-    client.channels
-      .find((x) => {
-        return x.name === "logs";
-      })
-      .send({
-        embed: {
-          color: 15844367,
-          description: "Someone switched from a voice channel to another",
-          fields: [
-            {
-              name: `${oldMember.user.username}`,
-              value: `has switched from ${oldUserChannel.name} to ${newUserChannel.name}`,
-            },
-          ],
-          timestamp: new Date(),
-        },
-      });
-  }
-});
-
+client.on('error', (err) => {
+    console.log(err)
+})
+client.on('warn', (warn) => {
+    console.log(warn)
+})
+var voiceChannelMemberList = []
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+    console.log("VoiceStateUpdate event triggered")
+    var newUserChannel = newMember.channel
+    var oldUserChannel = oldMember.channel
+    if (oldUserChannel === null && newUserChannel !== null) {
+        var newRegisteredMember = new voiceMember(newMember.member.user, newUserChannel, client)
+        voiceChannelMemberList.push(newRegisteredMember)
+        newRegisteredMember.joinEmbed()
+    } else if (oldUserChannel !== null && newUserChannel === null) {
+        for (let i = 0; i < voiceChannelMemberList.length; i++) {
+            const element = voiceChannelMemberList[i]
+            element.leaveEmbed()
+            if (element.userID === newMember.member.user.id) voiceChannelMemberList.splice(i)
+        }
+    } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
+        var memberData
+        for (let i = 0; i < voiceChannelMemberList.length; i++) {
+            const element = voiceChannelMemberList[i]
+            if (element.userID === newMember.member.user.id) memberData = element
+        }
+        if (newMember.selfDeaf !== memberData.state.selfDeaf)
+            memberData.updateState(updateStateCode.selfDeaf)
+        else if (newMember.selfMute !== memberData.state.selfMute)
+            memberData.updateState(updateStateCode.selfMute)
+        else if (newMember.serverDeaf !== memberData.state.serverDeaf)
+            memberData.updateState(updateStateCode.serverDeaf)
+        else if (newMember.serverMute !== memberData.state.serverMute)
+            memberData.updateState(updateStateCode.serverMute)
+        else if (newMember.streaming !== memberData.state.streaming)
+            memberData.updateState(updateStateCode.streaming)
+    } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
+        for (let i = 0; i < voiceChannelMemberList.length; i++) {
+            const element = voiceChannelMemberList[i]
+            element.changeChannelEmbed(newUserChannel)
+        }
+    }
+})
 client.login(process.env.TOKEN);
