@@ -3,15 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "dependencies": {
-    "discord.js": "^11.6.4"
-  },
-  "devDependencies": {
-    "prettier": "2.3.2"
-  },
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -22,5 +16,24 @@
   "bugs": {
     "url": "https://github.com/Ztumpie905509/discord.js-private-v2/issues"
   },
-  "homepage": "https://github.com/Ztumpie905509/discord.js-private-v2#readme"
+  "homepage": "https://github.com/Ztumpie905509/discord.js-private-v2#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "bufferutil": "^4.0.3",
+    "discord-api-types": "^0.23.1",
+    "discord.js": "^13.1.0",
+    "erlpack": "github:discord/erlpack",
+    "ffmpeg-static": "^4.4.0",
+    "tweetnacl": "^1.0.3",
+    "utf-8-validate": "^5.0.5",
+    "zlib-sync": "^0.1.7"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "typescript": "^4.4.3"
+  }
 }
