@@ -39,7 +39,7 @@ class voiceMember {
 			fields: [
 				{
 					name: `${this.username}`,
-					value: `has moved from ${this.channelName} to ${newChannel.name}.`
+					value: `has moved from ${this.channelName} to ${newChannel.name}`
 				}
 			],
 			timestamp: new Date()
@@ -65,11 +65,11 @@ class voiceMember {
 	joinEmbed() {
 		var embed = new MessageEmbed({
 			color: 3066993,
-			description: "Someone changed joined a channel.",
+			description: "Someone joined a channel.",
 			fields: [
 				{
 					name: `${this.username}`,
-					value: `has joined ${this.channelName}.`
+					value: `has joined ${this.channelName}`
 				}
 			],
 			timestamp: new Date()
@@ -83,7 +83,7 @@ class voiceMember {
 			fields: [
 				{
 					name: `${this.username}`,
-					value: `has left ${this.channelName}.`
+					value: `has left ${this.channelName}`
 				}
 			],
 			timestamp: new Date()
@@ -101,11 +101,11 @@ class voiceMember {
 	}
 	updateState(event:number) {
 		var messageList = {
-			selfDeaf: ["has deafened him/herself.", "has undeafened him/herself."],
-			selfMute: ["has muted him/herself.", "has unmuted him/herself."],
-			serverDeaf: ["has been server deafened.", "has been server undeafened."],
-			serverMute: ["has been server muted.", "has been server unmuted."],
-			streaming: ["has started streaming.", "has stopped streaming."]
+			selfDeaf: ["has deafened him/herself", "has undeafened him/herself"],
+			selfMute: ["has muted him/herself", "has unmuted him/herself"],
+			serverDeaf: ["has been server deafened", "has been server undeafened"],
+			serverMute: ["has been server muted", "has been server unmuted"],
+			streaming: ["has started streaming", "has stopped streaming"]
 		}
 		var message = ""
 		switch (event) {
