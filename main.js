@@ -1,5 +1,5 @@
 import { Client, Intents } from 'discord.js';
-import { channelID, token } from "./config.js";
+// import { channelID, token } from "./config.js";
 import { VoiceMember } from "./functions/index.js"
 const client = new Client({ intents: Object.values(Intents.FLAGS) });
 client.on('ready', () => {
@@ -17,8 +17,8 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
     if (oldUserChannel === null && newUserChannel !== null) {
-        // var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, "878928621148966932")
-        var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, channelID)
+        var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, "878928621148966932")
+        // var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, channelID)
         voiceChannelMemberList.push(newRegisteredMember)
         newRegisteredMember.joinEmbed()
     } else if (oldUserChannel !== null && newUserChannel === null) {
@@ -44,5 +44,5 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 })
-// client.login(process.env.TOKEN);
-client.login(token)
+client.login(process.env.TOKEN);
+// client.login(token)
