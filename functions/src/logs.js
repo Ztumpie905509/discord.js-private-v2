@@ -1,8 +1,16 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MessageEmbed } from 'discord.js';
-class voiceMember {
-    constructor(user, channel, client) {
+const updateStateCode = {
+    selfMute: 1,
+    selfDeaf: 2,
+    serverMute: 3,
+    serverDeaf: 4,
+    streaming: 5
+};
+class VoiceMember {
+    constructor(user, channel, client, logChannel) {
         this.client = client;
+        this.logChannel = logChannel;
         this.username = user.tag;
         this.guildID = channel.guildId;
         this.channelID = channel.id;
@@ -17,13 +25,13 @@ class voiceMember {
         };
     }
     changeChannelEmbed(newChannel) {
-        var embed = new MessageEmbed({
+        const embed = new MessageEmbed({
             color: 15844367,
             description: "Someone moved from a channel to another.",
             fields: [
                 {
                     name: `${this.username}`,
-                    value: `has moved from ${this.channelName} to ${newChannel.name}.`
+                    value: `has moved from ${this.channelName} to ${newChannel.name}`
                 }
             ],
             timestamp: new Date()
@@ -33,7 +41,7 @@ class voiceMember {
         this.sendEmbed(embed);
     }
     changeStateEmbed(message) {
-        var embed = new MessageEmbed({
+        const embed = new MessageEmbed({
             color: 15844367,
             description: "Someone changed his/her status on voice channels.",
             fields: [
@@ -46,14 +54,33 @@ class voiceMember {
         });
         this.sendEmbed(embed);
     }
+    compareDifference(newMember) {
+        const temp = {
+            selfMute: newMember.selfMute,
+            selfDeaf: newMember.selfDeaf,
+            serverMute: newMember.serverMute,
+            serverDeaf: newMember.serverDeaf,
+            streaming: newMember.streaming
+        };
+        if (this.state.selfDeaf !== temp.selfDeaf)
+            this.updateState(updateStateCode.selfDeaf);
+        if (this.state.selfMute !== temp.selfMute)
+            this.updateState(updateStateCode.selfMute);
+        if (this.state.serverDeaf !== temp.serverDeaf)
+            this.updateState(updateStateCode.serverDeaf);
+        if (this.state.serverMute !== temp.serverMute)
+            this.updateState(updateStateCode.serverMute);
+        if (this.state.streaming !== temp.streaming)
+            this.updateState(updateStateCode.streaming);
+    }
     joinEmbed() {
-        var embed = new MessageEmbed({
+        const embed = new MessageEmbed({
             color: 3066993,
-            description: "Someone changed joined a channel.",
+            description: "Someone joined a channel.",
             fields: [
                 {
                     name: `${this.username}`,
-                    value: `has joined ${this.channelName}.`
+                    value: `has joined ${this.channelName}`
                 }
             ],
             timestamp: new Date()
@@ -61,13 +88,13 @@ class voiceMember {
         this.sendEmbed(embed);
     }
     leaveEmbed() {
-        var embed = new MessageEmbed({
+        const embed = new MessageEmbed({
             color: 15158332,
             description: 'Someone left a voice channel.',
             fields: [
                 {
                     name: `${this.username}`,
-                    value: `has left ${this.channelName}.`
+                    value: `has left ${this.channelName}`
                 }
             ],
             timestamp: new Date()
@@ -76,7 +103,7 @@ class voiceMember {
     }
     sendEmbed(embed) {
         this.client.guilds.fetch(this.guildID).then((guild) => {
-            guild.channels.cache.get('878928621148966932').send({ embeds: [embed]});
+            guild.channels.cache.get(this.logChannel).send({ embeds: [embed] });
         });
     }
     toggleBoolean(x) {
@@ -86,14 +113,14 @@ class voiceMember {
             return (x = true);
     }
     updateState(event) {
-        var messageList = {
-            selfDeaf: ["has deafened him/herself.", "has undeafened him/herself."],
-            selfMute: ["has muted him/herself.", "has unmuted him/herself."],
-            serverDeaf: ["has been server deafened.", "has been server undeafened."],
-            serverMute: ["has been server muted.", "has been server unmuted."],
-            streaming: ["has started streaming.", "has stopped streaming."]
+        const messageList = {
+            selfDeaf: ["has deafened him/herself", "has undeafened him/herself"],
+            selfMute: ["has muted him/herself", "has unmuted him/herself"],
+            serverDeaf: ["has been server deafened", "has been server undeafened"],
+            serverMute: ["has been server muted", "has been server unmuted"],
+            streaming: ["has started streaming", "has stopped streaming"]
         };
-        var message = "";
+        let message = "";
         switch (event) {
             case 1:
                 message = messageList.selfMute[Number(this.state.selfMute)];
@@ -116,9 +143,7 @@ class voiceMember {
                 this.state.streaming = this.toggleBoolean(this.state.streaming);
                 break;
         }
-        var embed = this.changeStateEmbed(message);
-        console.log(embed);
-        return embed;
+        this.changeStateEmbed(message);
     }
 }
-export { voiceMember };
+export { VoiceMember };

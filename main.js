@@ -1,13 +1,7 @@
 import { Client, Intents } from 'discord.js';
-import { voiceMember } from "./functions/logs/index.js"
+import { channelID, token } from "./config.js";
+import { VoiceMember } from "./functions/index.js"
 const client = new Client({ intents: Object.values(Intents.FLAGS) });
-const updateStateCode = {
-    selfMute: 1,
-    selfDeaf: 2,
-    serverMute: 3,
-    serverDeaf: 4,
-    streaming: 5
-}
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -23,14 +17,17 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
     if (oldUserChannel === null && newUserChannel !== null) {
-        var newRegisteredMember = new voiceMember(newMember.member.user, newUserChannel, client)
+        // var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, "878928621148966932")
+        var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, channelID)
         voiceChannelMemberList.push(newRegisteredMember)
         newRegisteredMember.joinEmbed()
     } else if (oldUserChannel !== null && newUserChannel === null) {
         for (let i = 0; i < voiceChannelMemberList.length; i++) {
             const element = voiceChannelMemberList[i]
-            element.leaveEmbed()
-            if (element.userID === newMember.member.user.id) voiceChannelMemberList.splice(i)
+            if (element.userID === newMember.member.user.id) {
+                element.leaveEmbed()
+                voiceChannelMemberList.splice(i)
+            }
         }
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         var memberData
@@ -38,21 +35,14 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             const element = voiceChannelMemberList[i]
             if (element.userID === newMember.member.user.id) memberData = element
         }
-        if (newMember.selfDeaf !== memberData.state.selfDeaf)
-            memberData.updateState(updateStateCode.selfDeaf)
-        else if (newMember.selfMute !== memberData.state.selfMute)
-            memberData.updateState(updateStateCode.selfMute)
-        else if (newMember.serverDeaf !== memberData.state.serverDeaf)
-            memberData.updateState(updateStateCode.serverDeaf)
-        else if (newMember.serverMute !== memberData.state.serverMute)
-            memberData.updateState(updateStateCode.serverMute)
-        else if (newMember.streaming !== memberData.state.streaming)
-            memberData.updateState(updateStateCode.streaming)
+        if (memberData !== undefined) memberData.compareDifference(newMember)
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
         for (let i = 0; i < voiceChannelMemberList.length; i++) {
             const element = voiceChannelMemberList[i]
-            element.changeChannelEmbed(newUserChannel)
+            if (element.userID === newMember.member.user.id)
+                element.changeChannelEmbed(newUserChannel)
         }
     }
 })
-client.login(process.env.TOKEN);
+// client.login(process.env.TOKEN);
+client.login(token)
