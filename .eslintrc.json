@@ -32,7 +32,7 @@
         "brace-style": ["warn", "1tbs", {
             "allowSingleLine": true
         }],
-        "capitalized-comments": ["warn", "always"],
+        "capitalized-comments": ["warn", "never"],
         "comma-dangle": ["warn", {
             "arrays": "never",
             "objects": "never",
@@ -40,6 +40,7 @@
             "exports": "never",
             "functions": "never"
         }],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "comma-spacing": ["warn", {
             "after": true,
             "before": false
