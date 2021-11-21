@@ -51,7 +51,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     }
     console.log("Current members in channel: ")
     for (let i = 0; i < voiceChannelMemberList.length; i++)
-        console.log(voiceChannelMemberList.join("; "))
+        console.log(voiceChannelMemberList[i].username)
 
 })
 client.login(process.env.TOKEN);
