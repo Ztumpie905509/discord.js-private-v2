@@ -14,9 +14,6 @@ client.on('warn', (warn) => {
 var voiceChannelMemberList = []
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     console.log("VoiceStateUpdate event triggered")
-    console.log("Current members in channel: ")
-    for (let i = 0; i < voiceChannelMemberList.length; i++)
-        console.log(voiceChannelMemberList[i].username)
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
     if (oldUserChannel === null && newUserChannel !== null) {
@@ -52,6 +49,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             }
         }
     }
+    console.log("Current members in channel: ")
+    for (let i = 0; i < voiceChannelMemberList.length; i++)
+        console.log(voiceChannelMemberList.join("; "))
+
 })
 client.login(process.env.TOKEN);
 // client.login(token)
