@@ -168,8 +168,8 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 timestamp: new Date()
             })
             sendEmbed(newUserChannel.guildId, logChannel, embed)
-        } else if (oldMember.streaming && !newMember.streaming) {
-            console.log("Stopped streaming")
+        }
+        if (oldMember.streaming && !newMember.streaming) {
             var embed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
