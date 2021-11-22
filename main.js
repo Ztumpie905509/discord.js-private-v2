@@ -45,7 +45,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             ],
             timestamp: new Date()
         })
-        sendEmbed(newUserChannel.guildId, logChannel, embed)
+        sendEmbed(oldUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         if (!oldMember.selfDeaf && newMember.selfDeaf) {
             var embed = new MessageEmbed({
