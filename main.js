@@ -22,7 +22,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     var member = newMember.member.user
     var memberUsername = member.username + member.tag
     if (oldUserChannel === null && newUserChannel !== null) {
-        let embed = new MessageEmbed({
+        var embed = new MessageEmbed({
             color: 3066993,
             description: "Someone joined a channel.",
             fields: [
@@ -37,7 +37,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         var currentMember = []
         for (i = 0; i < newUserChannel.members.size; i++)
             currentMember.push(newUserChannel.members.at(i).user.username + newUserChannel.members.at(i).user.tag)
-        var embed = new MessageEmbed({
+        var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
             description: "These are the current members in this voice channel.",
             fields: [
@@ -48,9 +48,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             ],
             timestamp: new Date()
         })
-        sendEmbed(newUserChannel.guildId, logChannel, embed)
+        sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
-        let embed = new MessageEmbed({
+        var embed = new MessageEmbed({
             color: 15158332,
             description: "Someone left a channel.",
             fields: [
@@ -65,7 +65,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         var currentMember = []
         for (i = 0; i < newUserChannel.members.size; i++)
             currentMember.push(newUserChannel.members.at(i).user.username + newUserChannel.members.at(i).user.tag)
-        var embed = new MessageEmbed({
+        var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
             description: "These are the current members in this voice channel.",
             fields: [
@@ -76,10 +76,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             ],
             timestamp: new Date()
         })
-        sendEmbed(oldUserChannel.guildId, logChannel, embed)
+        sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         if (!oldMember.selfDeaf && newMember.selfDeaf) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -90,9 +90,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfDeaf && !newMember.selfDeaf) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -103,10 +103,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.selfMute && newMember.selfMute) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -117,9 +117,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfMute && !newMember.selfMute) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -130,10 +130,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.serverDeaf && newMember.serverDeaf) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -144,9 +144,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverDeaf && !newMember.serverDeaf) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -157,10 +157,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.serverMute && newMember.serverMute) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -171,9 +171,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverMute && !newMember.serverMute) {
-            var embed = new MessageEmbed({
+            var currentMembersEmbed = new MessageEmbed({
                 color: 15844367,
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
@@ -184,10 +184,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 ],
                 timestamp: new Date()
             })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
-        var embed = new MessageEmbed({
+        var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
             description: "Someone moved from a channel to another.",
             fields: [
@@ -198,7 +198,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             ],
             timestamp: new Date()
         })
-        sendEmbed(newUserChannel.guildId, logChannel, embed)
+        sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
     }
 })
 client.login(process.env.TOKEN);
