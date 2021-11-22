@@ -1,6 +1,10 @@
 import { Client, Intents } from 'discord.js';
 // import { channelID, token } from "./config.js";
-import { VoiceMember } from "./functions/index.js"
+function sendEmbed(guildID, logChannel, embed) {
+    client.guilds.fetch(guildID).then((guild) => {
+        guild.channels.cache.get(logChannel).send({ embeds: [embed] })
+    })
+}
 const client = new Client({ intents: Object.values(Intents.FLAGS) });
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -13,46 +17,187 @@ client.on('warn', (warn) => {
 })
 var voiceChannelMemberList = []
 client.on('voiceStateUpdate', (oldMember, newMember) => {
+    var logChannel = "878928621148966932"
     console.log("VoiceStateUpdate event triggered")
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
+    var member = newMember.member.user
     if (oldUserChannel === null && newUserChannel !== null) {
-        var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, "878928621148966932")
-        // var newRegisteredMember = new VoiceMember(newMember.member.user, newUserChannel, client, channelID)
-        voiceChannelMemberList.push(newRegisteredMember)
-        newRegisteredMember.joinEmbed()
+        let embed = new MessageEmbed({
+            color: 3066993,
+            description: "Someone joined a channel.",
+            fields: [
+                {
+                    name: `${member.username}`,
+                    value: `has joined ${newUserChannel.name}`
+                }
+            ],
+            timestamp: new Date()
+        })
+        sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
-        for (let i = 0; i < voiceChannelMemberList.length; i++) {
-            const element = voiceChannelMemberList[i]
-            if (element.userID === newMember.member.user.id) {
-                element.leaveEmbed()
-                voiceChannelMemberList.splice(i)
-                break
-            }
-        }
+        let embed = new MessageEmbed({
+            color: 15158332,
+            description: "Someone left a channel.",
+            fields: [
+                {
+                    name: `${member.username}`,
+                    value: `has joined ${oldUserChannel.name}`
+                }
+            ],
+            timestamp: new Date()
+        })
+        sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
-        var memberData
-        for (let i = 0; i < voiceChannelMemberList.length; i++) {
-            const element = voiceChannelMemberList[i]
-            if (element.userID === newMember.member.user.id) {
-                memberData = element
-                break
-            }
+        if (!oldMember.selfDeaf && newMember.selfDeaf) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `has deafened himself/herself.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        } else if (oldMember.selfDeaf && !newMember.selfDeaf) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `has undeafened himself/herself.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
         }
-        if (memberData) memberData.compareDifference(newMember)
+        if (!oldMember.selfMute && newMember.selfMute) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `has muted himself/herself.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        } else if (oldMember.selfMute && !newMember.selfMute) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `has unmuted himself/herself.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        }
+        if (!oldMember.serverDeaf && newMember.serverDeaf) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `was being deafened.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        } else if (oldMember.serverDeaf && !newMember.serverDeaf) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `was being undeafened.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        }
+        if (!oldMember.serverMute && newMember.serverMute) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `was being muted.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        } else if (oldMember.serverMute && !newMember.serverMute) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `was being unmuted.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        }
+        if (!oldMember.streaming && newMember.streaming) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `has started streaming.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        } else if (oldMember.streaming && !newMember.streaming) {
+            var embed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone changed his/her status on voice channels.",
+                fields: [
+                    {
+                        name: `${member.username}`,
+                        value: `has stopped streaming.`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, embed)
+        }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
-        for (let i = 0; i < voiceChannelMemberList.length; i++) {
-            const element = voiceChannelMemberList[i]
-            if (element.userID === newMember.member.user.id) {
-                element.changeChannelEmbed(newUserChannel)
-                break
-            }
-        }
+        var embed = new MessageEmbed({
+            color: 15844367,
+            description: "Someone moved from a channel to another.",
+            fields: [
+                {
+                    name: `${member.username}`,
+                    value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
+                }
+            ],
+            timestamp: new Date()
+        })
+        sendEmbed(newUserChannel.guildId, logChannel, embed)
     }
-    console.log("Current members in channel: ")
-    for (let i = 0; i < voiceChannelMemberList.length; i++)
-        console.log(voiceChannelMemberList[i].username)
-
 })
 client.login(process.env.TOKEN);
 // client.login(token)

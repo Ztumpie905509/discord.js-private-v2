@@ -13,23 +13,15 @@
   },
   "author": "Ztumpie",
   "license": "MIT",
-  "engines": {
-    "node": "16.9.1",
-    "npm": "7.21.1"
-  },
   "bugs": {
     "url": "https://github.com/Ztumpie905509/discord.js-private-v2/issues"
   },
   "homepage": "https://github.com/Ztumpie905509/discord.js-private-v2#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.6.0",
-    "@discordjs/rest": "^0.1.0-canary.0",
-    "bufferutil": "^4.0.3",
-    "discord-api-types": "^0.23.1",
-    "discord.js": "^13.1.0",
-    "ffmpeg-static": "^4.4.0",
-    "tweetnacl": "^1.0.3",
-    "utf-8-validate": "^5.0.5",
+    "bufferutil": "^4.0.5",
+    "discord.js": "^13.3.1",
+    "erlpack": "github:discord/erlpack",
+    "utf-8-validate": "^5.0.7",
     "zlib-sync": "^0.1.7"
   },
   "devDependencies": {
