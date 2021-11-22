@@ -35,7 +35,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         })
         sendEmbed(newUserChannel.guildId, logChannel, embed)
         var currentMember = []
-        for (i = 0; i < newUserChannel.members.size; i++)
+        for (var i = 0; i < newUserChannel.members.size; i++)
             currentMember.push(newUserChannel.members.at(i).user.username + newUserChannel.members.at(i).user.tag)
         var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
@@ -63,7 +63,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         })
         sendEmbed(oldUserChannel.guildId, logChannel, embed)
         var currentMember = []
-        for (i = 0; i < newUserChannel.members.size; i++)
+        for (var i = 0; i < newUserChannel.members.size; i++)
             currentMember.push(newUserChannel.members.at(i).user.username + newUserChannel.members.at(i).user.tag)
         var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
