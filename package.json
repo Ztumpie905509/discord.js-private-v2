@@ -7,6 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "v17.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ztumpie905509/discord.js-private-v2.git"
