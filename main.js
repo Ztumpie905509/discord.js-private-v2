@@ -155,6 +155,8 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             })
             sendEmbed(newUserChannel.guildId, logChannel, embed)
         }
+        console.log(oldMember.streaming)
+        console.log(newMember.streaming)
         if (!oldMember.streaming && newMember.streaming) {
             var embed = new MessageEmbed({
                 color: 15844367,
