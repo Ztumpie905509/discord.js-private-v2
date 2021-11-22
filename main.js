@@ -1,4 +1,4 @@
-import { Client, Intents, MessageEmbed } from 'discord.js';
+import { Client, Intents, MessageEmbed, NewsChannel } from 'discord.js';
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {
         guild.channels.cache.get(logChannel).send({ embeds: [embed] })
@@ -20,14 +20,30 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
     var member = newMember.member.user
+    var memberUsername = member.username + member.tag
     if (oldUserChannel === null && newUserChannel !== null) {
         let embed = new MessageEmbed({
             color: 3066993,
             description: "Someone joined a channel.",
             fields: [
                 {
-                    name: `${member.username}`,
+                    name: `${memberUsername}`,
                     value: `has joined ${newUserChannel.name}`
+                }
+            ],
+            timestamp: new Date()
+        })
+        sendEmbed(newUserChannel.guildId, logChannel, embed)
+        var currentMember = []
+        for (i = 0; i < newUserChannel.members.size; i++)
+            currentMember.push(newUserChannel.members.at(i).user.username + newUserChannel.members.at(i).user.tag)
+        var embed = new MessageEmbed({
+            color: 15844367,
+            description: "These are the current members in this voice channel.",
+            fields: [
+                {
+                    name: `${newUserChannel.name}`,
+                    value: `${currentMember.join("\n")}`
                 }
             ],
             timestamp: new Date()
@@ -39,8 +55,23 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             description: "Someone left a channel.",
             fields: [
                 {
-                    name: `${member.username}`,
+                    name: `${memberUsername}`,
                     value: `has left ${oldUserChannel.name}`
+                }
+            ],
+            timestamp: new Date()
+        })
+        sendEmbed(oldUserChannel.guildId, logChannel, embed)
+        var currentMember = []
+        for (i = 0; i < newUserChannel.members.size; i++)
+            currentMember.push(newUserChannel.members.at(i).user.username + newUserChannel.members.at(i).user.tag)
+        var embed = new MessageEmbed({
+            color: 15844367,
+            description: "These are the current members in this voice channel.",
+            fields: [
+                {
+                    name: `${oldUserChannel.name}`,
+                    value: `${currentMember.join("\n")}`
                 }
             ],
             timestamp: new Date()
@@ -53,7 +84,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `has deafened himself/herself.`
                     }
                 ],
@@ -66,7 +97,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `has undeafened himself/herself.`
                     }
                 ],
@@ -80,7 +111,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `has muted himself/herself.`
                     }
                 ],
@@ -93,7 +124,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `has unmuted himself/herself.`
                     }
                 ],
@@ -107,7 +138,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `was being deafened.`
                     }
                 ],
@@ -120,7 +151,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `was being undeafened.`
                     }
                 ],
@@ -134,7 +165,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `was being muted.`
                     }
                 ],
@@ -147,7 +178,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 description: "Someone changed his/her status on voice channels.",
                 fields: [
                     {
-                        name: `${member.username}`,
+                        name: `${memberUsername}`,
                         value: `was being unmuted.`
                     }
                 ],
@@ -161,7 +192,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             description: "Someone moved from a channel to another.",
             fields: [
                 {
-                    name: `${member.username}`,
+                    name: `${memberUsername}`,
                     value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
                 }
             ],
