@@ -1,5 +1,4 @@
 import { Client, Intents } from 'discord.js';
-// import { channelID, token } from "./config.js";
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {
         guild.channels.cache.get(logChannel).send({ embeds: [embed] })
@@ -15,7 +14,6 @@ client.on('error', (err) => {
 client.on('warn', (warn) => {
     console.log(warn)
 })
-var voiceChannelMemberList = []
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     var logChannel = "878928621148966932"
     console.log("VoiceStateUpdate event triggered")
@@ -200,4 +198,3 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     }
 })
 client.login(process.env.TOKEN);
-// client.login(token)
