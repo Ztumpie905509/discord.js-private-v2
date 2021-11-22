@@ -155,36 +155,6 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             })
             sendEmbed(newUserChannel.guildId, logChannel, embed)
         }
-        console.log(oldMember.streaming)
-        console.log(newMember.streaming)
-        if (!oldMember.streaming && newMember.streaming) {
-            var embed = new MessageEmbed({
-                color: 15844367,
-                description: "Someone changed his/her status on voice channels.",
-                fields: [
-                    {
-                        name: `${member.username}`,
-                        value: `has started streaming.`
-                    }
-                ],
-                timestamp: new Date()
-            })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
-        }
-        if (oldMember.streaming && !newMember.streaming) {
-            var embed = new MessageEmbed({
-                color: 15844367,
-                description: "Someone changed his/her status on voice channels.",
-                fields: [
-                    {
-                        name: `${member.username}`,
-                        value: `has stopped streaming.`
-                    }
-                ],
-                timestamp: new Date()
-            })
-            sendEmbed(newUserChannel.guildId, logChannel, embed)
-        }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
         var embed = new MessageEmbed({
             color: 15844367,
