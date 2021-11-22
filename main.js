@@ -40,7 +40,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             fields: [
                 {
                     name: `${member.username}`,
-                    value: `has joined ${oldUserChannel.name}`
+                    value: `has left ${oldUserChannel.name}`
                 }
             ],
             timestamp: new Date()
