@@ -106,7 +106,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has deafened himself / herself.`
+                        value: `has deafened himself/herself.`
                     }
                 ],
                 timestamp: new Date()
@@ -119,7 +119,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has undeafened himself / herself.`
+                        value: `has undeafened himself/herself.`
                     }
                 ],
                 timestamp: new Date()
@@ -133,7 +133,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has muted himself / herself.`
+                        value: `has muted himself/herself.`
                     }
                 ],
                 timestamp: new Date()
@@ -146,7 +146,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has unmuted himself / herself.`
+                        value: `has unmuted himself/herself.`
                     }
                 ],
                 timestamp: new Date()
