@@ -221,6 +221,61 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             timestamp: new Date()
         })
         sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
+        try {
+            try {
+                var currentMember = []
+                oldUserChannel.members.each((user) => {
+                    currentMember.push(user.user.tag)
+                })
+                var currentMembersEmbed = new MessageEmbed({
+                    color: 15844367,
+                    description: "These are the current members in this voice channel.",
+                    fields: [
+                        {
+                            name: `${oldUserChannel.name}`,
+                            value: `${currentMember.join("\n")}`
+                        }
+                    ],
+                    timestamp: new Date()
+                })
+                sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
+            } catch (err) {
+                try {
+                    var currentMembersEmbed = new MessageEmbed({
+                        color: 15844367,
+                        description: "These are the current members in this voice channel.",
+                        fields: [
+                            {
+                                name: `${oldUserChannel.name}`,
+                                value: "(None)"
+                            }
+                        ],
+                        timestamp: new Date()
+                    })
+                    sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            var currentMember = []
+            newUserChannel.members.each((user) => {
+                currentMember.push(user.user.tag)
+            })
+            var currentMembersEmbed = new MessageEmbed({
+                color: 15844367,
+                description: "These are the current members in this voice channel.",
+                fields: [
+                    {
+                        name: `${newUserChannel.name}`,
+                        value: `${currentMember.join("\n")}`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
+        } catch (error) {
+            console.log(error)
+        }
     }
 })
 client.login(process.env.TOKEN);
