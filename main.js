@@ -1,4 +1,4 @@
-const { Client, Intents, MessageEmbed } = require("discord.js")
+import { Client, Intents, MessageEmbed } from "discord.js";
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {
         guild.channels.cache.get(logChannel).send({ embeds: [embed] })
