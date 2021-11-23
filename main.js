@@ -35,8 +35,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         })
         sendEmbed(newUserChannel.guildId, logChannel, embed)
         var currentMember = []
-        for (var i = 0; i < newUserChannel.members.size; i++)
-            currentMember.push(newUserChannel.members.at(i).user.tag)
+        newUserChannel.members.each((user) => {
+            currentMember.push(user.user.tag)
+        })
         var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
             description: "These are the current members in this voice channel.",
@@ -63,8 +64,9 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         })
         sendEmbed(oldUserChannel.guildId, logChannel, embed)
         var currentMember = []
-        for (var i = 0; i < oldUserChannel.members.size; i++)
-            currentMember.push(oldUserChannel.members.at(i).user.tag)
+        newUserChannel.members.each((user) => {
+            currentMember.push(user.user.tag)
+        })
         var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
             description: "These are the current members in this voice channel.",
