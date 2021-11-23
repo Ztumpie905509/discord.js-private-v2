@@ -209,7 +209,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
         var currentMembersEmbed = new MessageEmbed({
-            color: 15844367,
+            color: 16753920,
             description: "Someone moved from a channel to another.",
             fields: [
                 {
