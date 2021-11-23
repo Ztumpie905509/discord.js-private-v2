@@ -68,15 +68,13 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             oldUserChannel.members.each((user) => {
                 currentMember.push(user.user.tag)
             })
-        else
-            currentMember.push("(None)")
         var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
             description: "These are the current members in this voice channel.",
             fields: [
                 {
                     name: `${oldUserChannel.name}`,
-                    value: `${currentMember.join("\n")}`
+                    value: `${currentMember ? currentMember.join("\n") : "(None)"}`
                 }
             ],
             timestamp: new Date()
