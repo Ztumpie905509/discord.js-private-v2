@@ -39,7 +39,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             currentMember.push(user.user.tag)
         })
         var currentMembersEmbed = new MessageEmbed({
-            color: 15844367,
+            color: 5793266,
             description: "These are the current members in this voice channel.",
             fields: [
                 {
@@ -69,7 +69,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 currentMember.push(user.user.tag)
             })
             var currentMembersEmbed = new MessageEmbed({
-                color: 15844367,
+                color: 5793266,
                 description: "These are the current members in this voice channel.",
                 fields: [
                     {
@@ -83,7 +83,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         } catch (err) {
             try {
                 var currentMembersEmbed = new MessageEmbed({
-                    color: 15844367,
+                    color: 5793266,
                     description: "These are the current members in this voice channel.",
                     fields: [
                         {
@@ -209,7 +209,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
         var currentMembersEmbed = new MessageEmbed({
-            color: 16753920,
+            color: 15844367,
             description: "Someone moved from a channel to another.",
             fields: [
                 {
@@ -227,7 +227,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     currentMember.push(user.user.tag)
                 })
                 var currentMembersEmbed = new MessageEmbed({
-                    color: 15844367,
+                    color: 5793266,
                     description: "These are the current members in this voice channel.",
                     fields: [
                         {
@@ -241,7 +241,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             } catch (err) {
                 try {
                     var currentMembersEmbed = new MessageEmbed({
-                        color: 15844367,
+                        color: 5793266,
                         description: "These are the current members in this voice channel.",
                         fields: [
                             {
@@ -261,7 +261,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 currentMember.push(user.user.tag)
             })
             var currentMembersEmbed = new MessageEmbed({
-                color: 15844367,
+                color: 5793266,
                 description: "These are the current members in this voice channel.",
                 fields: [
                     {
