@@ -1,4 +1,5 @@
 import { Client, Intents, MessageEmbed } from "discord.js";
+import { isConstructorDeclaration } from "typescript";
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {
         guild.channels.cache.get(logChannel).send({ embeds: [embed] })
@@ -63,23 +64,41 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             timestamp: new Date()
         })
         sendEmbed(oldUserChannel.guildId, logChannel, embed)
-        var currentMember = []
-        if (oldUserChannel.members !== null)
+        try {
+            var currentMember = []
             oldUserChannel.members.each((user) => {
                 currentMember.push(user.user.tag)
             })
-        var currentMembersEmbed = new MessageEmbed({
-            color: 15844367,
-            description: "These are the current members in this voice channel.",
-            fields: [
-                {
-                    name: `${oldUserChannel.name}`,
-                    value: `${currentMember ? currentMember.join("\n") : "(None)"}`
-                }
-            ],
-            timestamp: new Date()
-        })
-        sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
+            var currentMembersEmbed = new MessageEmbed({
+                color: 15844367,
+                description: "These are the current members in this voice channel.",
+                fields: [
+                    {
+                        name: `${oldUserChannel.name}`,
+                        value: `${currentMember.join("\n")}`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
+        } catch (err) {
+            try {
+                var currentMembersEmbed = new MessageEmbed({
+                    color: 15844367,
+                    description: "These are the current members in this voice channel.",
+                    fields: [
+                        {
+                            name: `${oldUserChannel.name}`,
+                            value: "(None)"
+                        }
+                    ],
+                    timestamp: new Date()
+                })
+                sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
+            } catch (error) {
+                console.log(error)
+            }
+        }
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         if (!oldMember.selfDeaf && newMember.selfDeaf) {
             var currentMembersEmbed = new MessageEmbed({
@@ -88,7 +107,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has deafened himself/herself.`
+                        value: `has deafened himself / herself.`
                     }
                 ],
                 timestamp: new Date()
@@ -101,7 +120,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has undeafened himself/herself.`
+                        value: `has undeafened himself / herself.`
                     }
                 ],
                 timestamp: new Date()
@@ -115,7 +134,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has muted himself/herself.`
+                        value: `has muted himself / herself.`
                     }
                 ],
                 timestamp: new Date()
@@ -128,7 +147,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has unmuted himself/herself.`
+                        value: `has unmuted himself / herself.`
                     }
                 ],
                 timestamp: new Date()
