@@ -16,7 +16,6 @@ client.on('warn', (warn) => {
 })
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     var logChannel = "878928621148966932"
-    console.log("VoiceStateUpdate event triggered")
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
     var member = newMember.member.user
