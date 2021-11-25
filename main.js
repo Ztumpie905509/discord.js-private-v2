@@ -277,6 +277,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 })
+var timeout
 client.on("voiceStateUpdate", async (oldState, newState) => {
     // specialID = "337913859497132032"
     var specialID = "326928909528596481"
@@ -284,7 +285,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!oldState || !newState) return
     if (newState.member.user.id === specialID)
         if (!oldState.selfMute && newState.selfMute)
-            var timeout = setTimeout(() => { newState.setChannel(channel) }, 5000)
+            timeout = setTimeout(() => { newState.setChannel(channel) }, 5000)
         else if (oldState.selfMute && !newState.selfMute)
             clearTimeout(timeout)
 })
