@@ -284,7 +284,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!oldState || !newState) return
     if (newState.member.user.id === specialID)
         if (!oldState.selfMute && newState.selfMute)
-            var timeout = setTimeout(newState.setChannel(channel), 5000)
+            var timeout = setTimeout(() => { newState.setChannel(channel) }, 5000)
         else if (oldState.selfMute && !newState.selfMute)
             clearTimeout(timeout)
 })
