@@ -277,4 +277,12 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 })
+client.on("voiceStateUpdate", async (oldState, newState) => {
+    // specialID = "337913859497132032"
+    specialID = "326928909528596481"
+    channel = "913112357100724244"
+    if (!oldState || !newState) return
+    if (!oldState.selfMute && newState.selfMute && newState.member.user.id === specialID)
+        setTimeout(newState.setChannel(channel), 1000)
+})
 client.login(process.env.TOKEN);
