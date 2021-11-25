@@ -277,30 +277,15 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }
     }
 })
-var unmuted = false
-client.on("voiceStateUpdate", async (oldState, newState) => {
-    // specialID = "337913859497132032"
-    var specialID = "326928909528596481"
-    if (oldState.selfMute && !newState.selfMute && newState.member.user.id === specialID)
-        unmuted = true
-})
 client.on("voiceStateUpdate", async (oldState, newState) => {
     // specialID = "337913859497132032"
     var specialID = "326928909528596481"
     var channel = "913112357100724244"
-    function moveMember(channel) {
-        clearTimeout(timeout)
-        done = true
-        newState.setChannel(channel)
-    }
     if (!oldState || !newState) return
-    if (!oldState.selfMute && newState.selfMute && newState.member.user.id === specialID) {
-        var done = false
-        var timeout = setTimeout(() => {
-            moveMember(channel)
-        }, 5000)
-        if (!unmuted && !done)
-            moveMember(channel)
-    }
+    if (newState.member.user.id === specialID)
+        if (!oldState.selfMute && newState.selfMute)
+            var timeout = setTimeout(newState.setChannel(channel), 5000)
+        else if (oldState.selfMute && !newState.selfMute)
+            clearTimeout(timeout)
 })
 client.login(process.env.TOKEN);
