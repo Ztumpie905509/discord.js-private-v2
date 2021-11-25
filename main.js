@@ -279,7 +279,6 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 var timeout
 client.on("voiceStateUpdate", async (oldState, newState) => {
     var specialID = "337913859497132032"
-    // var specialID = "326928909528596481"
     var channel = "913112357100724244"
     if (!oldState || !newState) return
     if (newState.member.user.id === specialID)
