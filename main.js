@@ -280,14 +280,14 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 var unmuted = false
 client.on("voiceStateUpdate", async (oldState, newState) => {
     // specialID = "337913859497132032"
-    specialID = "326928909528596481"
+    var specialID = "326928909528596481"
     if (oldState.selfMute && !newState.selfMute && newState.member.user.id === specialID)
         unmuted = true
 })
 client.on("voiceStateUpdate", async (oldState, newState) => {
     // specialID = "337913859497132032"
-    specialID = "326928909528596481"
-    channel = "913112357100724244"
+    var specialID = "326928909528596481"
+    var channel = "913112357100724244"
     function moveMember(channel) {
         clearTimeout(timeout)
         done = true
