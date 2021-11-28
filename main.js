@@ -38,7 +38,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     value: `${newUserChannel.name}\n\nMember List:\n${currentMember.join("\n")}`
                 }
             ],
-            timestamp: Date.now()
+            footer: new Date.toString()
         })
         sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
@@ -60,7 +60,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\nMember List:\n${currentMember.join("\n")}`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
         } catch (err) {
@@ -77,7 +77,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\nMember List:\n(None)`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
         }
@@ -92,7 +92,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has deafened himself/herself.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfDeaf && !newMember.selfDeaf) {
@@ -105,7 +105,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has undeafened himself/herself.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
@@ -119,7 +119,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has muted himself/herself.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfMute && !newMember.selfMute) {
@@ -132,7 +132,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has unmuted himself/herself.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
@@ -146,7 +146,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being deafened.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverDeaf && !newMember.serverDeaf) {
@@ -159,7 +159,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being undeafened.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
@@ -173,7 +173,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being muted.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverMute && !newMember.serverMute) {
@@ -186,7 +186,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being unmuted.`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
@@ -217,7 +217,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\nMember List:\n${oldChannelCurrentMember.join("\n")}`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } catch (err) {
@@ -242,7 +242,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\nMember List:\n(None)`
                     }
                 ],
-                timestamp: Date.now()
+                footer: new Date.toString()
             })
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
