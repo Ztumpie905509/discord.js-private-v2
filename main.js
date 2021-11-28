@@ -35,7 +35,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 },
                 {
                     name: "These are the current statistics for the following voice channel:",
-                    value: `${newUserChannel.name}\n\nMember List:\n${currentMember.join("\n")}`
+                    value: `${newUserChannel.name}\n\n**Member List**:\n${currentMember.join("\n")}`
                 }
             ],
         }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
@@ -56,7 +56,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     },
                     {
                         name: "These are the current statistics for the following voice channel:",
-                        value: `${oldUserChannel.name}\n\nMember List:\n${currentMember.join("\n")}`
+                        value: `${oldUserChannel.name}\n\n**Member List**:\n${currentMember.join("\n")}`
                     }
                 ],
             }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
@@ -72,7 +72,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     },
                     {
                         name: "These are the current statistics for the following voice channel:",
-                        value: `${oldUserChannel.name}\n\nMember List:\n(None)`
+                        value: `${oldUserChannel.name}\n\n**Member List**:\n(None)`
                     }
                 ],
             }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
@@ -199,11 +199,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     },
                     {
                         name: "These are the current statistics for the following voice channel:",
-                        value: `${newUserChannel.name}\n\nMember List:\n${newChannelCurrentMember.join("\n")}`
+                        value: `${newUserChannel.name}\n\n**Member List**:\n${newChannelCurrentMember.join("\n")}`
                     },
                     {
                         name: "These are the current statistics for the following voice channel:",
-                        value: `${oldUserChannel.name}\n\nMember List:\n${oldChannelCurrentMember.join("\n")}`
+                        value: `${oldUserChannel.name}\n\n**Member List**:\n${oldChannelCurrentMember.join("\n")}`
                     }
                 ],
             }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
@@ -223,11 +223,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     },
                     {
                         name: "These are the current statistics for the following voice channel:",
-                        value: `${newUserChannel.name}\n\nMember List:\n${newChannelCurrentMember.join("\n")}`
+                        value: `${newUserChannel.name}\n\n**Member List**:\n${newChannelCurrentMember.join("\n")}`
                     },
                     {
                         name: "These are the current statistics for the following voice channel:",
-                        value: `${oldUserChannel.name}\n\nMember List:\n(None)`
+                        value: `${oldUserChannel.name}\n\n**Member List**:\n(None)`
                     }
                 ],
             }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
