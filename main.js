@@ -21,6 +21,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     var member = newMember.member.user
     var memberUsername = member.tag
     if (oldUserChannel === null && newUserChannel !== null) {
+        var currentMember = []
+        newUserChannel.members.each((user) => {
+            currentMember.push(user.user.tag)
+        })
         var embed = new MessageEmbed({
             color: 3066993,
             description: "Someone joined a channel.",
@@ -28,19 +32,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 {
                     name: `${memberUsername}`,
                     value: `has joined ${newUserChannel.name}`
-                }
-            ],
-            timestamp: new Date()
-        })
-        sendEmbed(newUserChannel.guildId, logChannel, embed)
-        var currentMember = []
-        newUserChannel.members.each((user) => {
-            currentMember.push(user.user.tag)
-        })
-        var currentMembersEmbed = new MessageEmbed({
-            color: 5793266,
-            description: "These are the current members in this voice channel.",
-            fields: [
+                },
+                {
+                    name: " ",
+                    value: "These are the current members in these voice channels:"
+                },
                 {
                     name: `${newUserChannel.name}`,
                     value: `${currentMember.join("\n")}`
@@ -48,29 +44,25 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             ],
             timestamp: new Date()
         })
-        sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
+        sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
-        var embed = new MessageEmbed({
-            color: 15158332,
-            description: "Someone left a channel.",
-            fields: [
-                {
-                    name: `${memberUsername}`,
-                    value: `has left ${oldUserChannel.name}`
-                }
-            ],
-            timestamp: new Date()
-        })
-        sendEmbed(oldUserChannel.guildId, logChannel, embed)
         try {
             var currentMember = []
             oldUserChannel.members.each((user) => {
                 currentMember.push(user.user.tag)
             })
             var currentMembersEmbed = new MessageEmbed({
-                color: 5793266,
-                description: "These are the current members in this voice channel.",
+                color: 15158332,
+                description: "Someone left a channel.",
                 fields: [
+                    {
+                        name: `${memberUsername}`,
+                        value: `has left ${oldUserChannel.name}`
+                    },
+                    {
+                        name: " ",
+                        value: "These are the current members in these voice channels:"
+                    },
                     {
                         name: `${oldUserChannel.name}`,
                         value: `${currentMember.join("\n")}`
@@ -80,22 +72,26 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             })
             sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
         } catch (err) {
-            try {
-                var currentMembersEmbed = new MessageEmbed({
-                    color: 5793266,
-                    description: "These are the current members in this voice channel.",
-                    fields: [
-                        {
-                            name: `${oldUserChannel.name}`,
-                            value: "(None)"
-                        }
-                    ],
-                    timestamp: new Date()
-                })
-                sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
-            } catch (error) {
-                console.log(error)
-            }
+            var currentMembersEmbed = new MessageEmbed({
+                color: 15158332,
+                description: "Someone left a channel.",
+                fields: [
+                    {
+                        name: `${memberUsername}`,
+                        value: `has left ${oldUserChannel.name}`
+                    },
+                    {
+                        name: " ",
+                        value: "These are the current members in this voice channel:"
+                    },
+                    {
+                        name: `${oldUserChannel.name}`,
+                        value: `(None)`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         if (!oldMember.selfDeaf && newMember.selfDeaf) {
@@ -207,72 +203,68 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
-        var currentMembersEmbed = new MessageEmbed({
-            color: 15844367,
-            description: "Someone moved from a channel to another.",
-            fields: [
-                {
-                    name: `${memberUsername}`,
-                    value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
-                }
-            ],
-            timestamp: new Date()
-        })
-        sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         try {
-            try {
-                var oldChannelCurrentMember = []
-                oldUserChannel.members.each((user) => {
-                    oldChannelCurrentMember.push(user.user.tag)
-                })
-                var newChannelCurrentMember = []
-                newUserChannel.members.each((user) => {
-                    newChannelCurrentMember.push(user.user.tag)
-                })
-                var currentMembersEmbed = new MessageEmbed({
-                    color: 5793266,
-                    description: "These are the current members in this voice channel.",
-                    fields: [
-                        {
-                            name: `${newUserChannel.name}`,
-                            value: `${newChannelCurrentMember.join("\n")}`
-                        },
-                        {
-                            name: `${oldUserChannel.name}`,
-                            value: `${oldChannelCurrentMember.join("\n")}`
-                        }
-                    ],
-                    timestamp: new Date()
-                })
-                sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
-            } catch (err) {
-                try {
-                    var newChannelCurrentMember = []
-                    newUserChannel.members.each((user) => {
-                        newChannelCurrentMember.push(user.user.tag)
-                    })
-                    var currentMembersEmbed = new MessageEmbed({
-                        color: 5793266,
-                        description: "These are the current members in this voice channel.",
-                        fields: [
-                            {
-                                name: `${newUserChannel.name}`,
-                                value: `${newChannelCurrentMember.join("\n")}`
-                            },
-                            {
-                                name: `${oldUserChannel.name}`,
-                                value: "(None)"
-                            }
-                        ],
-                        timestamp: new Date()
-                    })
-                    sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-        } catch (error) {
-            console.log(error)
+            var oldChannelCurrentMember = []
+            oldUserChannel.members.each((user) => {
+                oldChannelCurrentMember.push(user.user.tag)
+            })
+            var newChannelCurrentMember = []
+            newUserChannel.members.each((user) => {
+                newChannelCurrentMember.push(user.user.tag)
+            })
+            var currentMembersEmbed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone moved from a channel to another.",
+                fields: [
+                    {
+                        name: `${memberUsername}`,
+                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
+                    },
+                    {
+                        name: " ",
+                        value: "These are the current members in these voice channels:"
+                    },
+                    {
+                        name: `${newUserChannel.name}`,
+                        value: `${newChannelCurrentMember.join("\n")}`
+                    },
+                    {
+                        name: `${oldUserChannel.name}`,
+                        value: `${oldChannelCurrentMember.join("\n")}`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
+        } catch (err) {
+            var newChannelCurrentMember = []
+            newUserChannel.members.each((user) => {
+                newChannelCurrentMember.push(user.user.tag)
+            })
+            var currentMembersEmbed = new MessageEmbed({
+                color: 15844367,
+                description: "Someone moved from a channel to another.",
+                fields: [
+                    {
+                        name: `${memberUsername}`,
+                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
+                    },
+                    {
+                        name: " ",
+                        value: "These are the current members in these voice channels:"
+                    },
+                    {
+                        name: `${newUserChannel.name}`,
+                        value: `${newChannelCurrentMember.join("\n")}`
+                    },
+                    {
+                        name: `${oldUserChannel.name}`,
+                        value: `(None)`
+                    }
+                ],
+                timestamp: new Date()
+            })
+            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     }
 })
@@ -284,7 +276,11 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (newState.member.user.id === specialID)
         if (newState.selfMute) {
             var time = 15 * 60 * 1000
-            timeout = setTimeout(() => { newState.setChannel(channel) }, time)
-        } else if (!newState.selfMute) { clearTimeout(timeout) }
+            timeout = setTimeout(() => {
+                newState.setChannel(channel)
+            }, time)
+        } else if (!newState.selfMute) {
+            clearTimeout(timeout)
+        }
 })
 client.login(process.env.TOKEN);
