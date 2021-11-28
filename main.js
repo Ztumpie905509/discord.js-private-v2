@@ -38,7 +38,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     value: `${newUserChannel.name}\n\n**Member List**:\n${currentMember.join("\n")}`
                 }
             ],
-        }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+        }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
         sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
         try {
@@ -59,7 +59,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\n**Member List**:\n${currentMember.join("\n")}`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
         } catch (err) {
             var currentMembersEmbed = new MessageEmbed({
@@ -75,7 +75,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\n**Member List**:\n(None)`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
@@ -89,7 +89,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has deafened himself/herself.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfDeaf && !newMember.selfDeaf) {
             var currentMembersEmbed = new MessageEmbed({
@@ -101,7 +101,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has undeafened himself/herself.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.selfMute && newMember.selfMute) {
@@ -114,7 +114,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has muted himself/herself.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfMute && !newMember.selfMute) {
             var currentMembersEmbed = new MessageEmbed({
@@ -126,7 +126,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has unmuted himself/herself.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.serverDeaf && newMember.serverDeaf) {
@@ -139,7 +139,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being deafened.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverDeaf && !newMember.serverDeaf) {
             var currentMembersEmbed = new MessageEmbed({
@@ -151,7 +151,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being undeafened.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.serverMute && newMember.serverMute) {
@@ -164,7 +164,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being muted.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverMute && !newMember.serverMute) {
             var currentMembersEmbed = new MessageEmbed({
@@ -176,7 +176,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being unmuted.`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
@@ -206,7 +206,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\n**Member List**:\n${oldChannelCurrentMember.join("\n")}`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } catch (err) {
             var newChannelCurrentMember = []
@@ -230,7 +230,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `${oldUserChannel.name}\n\n**Member List**:\n(None)`
                     }
                 ],
-            }).setFooter(`${new Date().toLocaleString("en-US", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     }
