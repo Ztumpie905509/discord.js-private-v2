@@ -34,11 +34,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     value: `has joined ${newUserChannel.name}`
                 },
                 {
-                    name: " ",
-                    value: "These are the current members in these voice channels:"
+                    name: "These are the current statistics for the following voice channel:",
+                    value: `${newUserChannel.name}`
                 },
                 {
-                    name: `${newUserChannel.name}`,
+                    name: "Member List:",
                     value: `${currentMember.join("\n")}`
                 }
             ],
@@ -60,11 +60,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has left ${oldUserChannel.name}`
                     },
                     {
-                        name: " ",
-                        value: "These are the current members in these voice channels:"
+                        name: "These are the current statistics for the following voice channel:",
+                        value: `${oldUserChannel.name}`
                     },
                     {
-                        name: `${oldUserChannel.name}`,
+                        name: `Member List:`,
                         value: `${currentMember.join("\n")}`
                     }
                 ],
@@ -81,11 +81,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has left ${oldUserChannel.name}`
                     },
                     {
-                        name: " ",
-                        value: "These are the current members in this voice channel:"
+                        name: "These are the current statistics for the following voice channel:",
+                        value: `${oldUserChannel.name}`
                     },
                     {
-                        name: `${oldUserChannel.name}`,
+                        name: `Member List:`,
                         value: `(None)`
                     }
                 ],
@@ -221,15 +221,19 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
                     },
                     {
-                        name: " ",
-                        value: "These are the current members in these voice channels:"
+                        name: "These are the current statistics for the following voice channel:",
+                        value: `${newUserChannel.name}`
                     },
                     {
-                        name: `${newUserChannel.name}`,
+                        name: `Member List:`,
                         value: `${newChannelCurrentMember.join("\n")}`
                     },
                     {
-                        name: `${oldUserChannel.name}`,
+                        name: "These are the current statistics for the following voice channel:",
+                        value: `${oldUserChannel.name}`
+                    },
+                    {
+                        name: `Member List:`,
                         value: `${oldChannelCurrentMember.join("\n")}`
                     }
                 ],
@@ -250,15 +254,19 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}`
                     },
                     {
-                        name: " ",
-                        value: "These are the current members in these voice channels:"
+                        name: "These are the current statistics for the following voice channel:",
+                        value: `${newUserChannel.name}`
                     },
                     {
-                        name: `${newUserChannel.name}`,
+                        name: `Member List:`,
                         value: `${newChannelCurrentMember.join("\n")}`
                     },
                     {
-                        name: `${oldUserChannel.name}`,
+                        name: "These are the current statistics for the following voice channel:",
+                        value: `${oldUserChannel.name}`
+                    },
+                    {
+                        name: `Member List:`,
                         value: `(None)`
                     }
                 ],
