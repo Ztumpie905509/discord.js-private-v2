@@ -42,7 +42,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             currentMember.push(user.user.tag)
         })
         var memberListMessage = ""
-        if (!currentMember.length(0))
+        if (currentMember.length)
             memberListMessage = currentMember.join("\n")
         else memberListMessage = "(None)"
         var currentMembersEmbed = new MessageEmbed({
@@ -167,7 +167,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             newChannelCurrentMember.push(user.user.tag)
         })
         var memberListMessage = ""
-        if (!currentMember.length(0))
+        if (currentMember.length)
             memberListMessage = currentMember.join("\n")
         else memberListMessage = "(None)"
         var currentMembersEmbed = new MessageEmbed({
