@@ -31,7 +31,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             fields: [
                 {
                     name: `${memberUsername}`,
-                    value: `has joined ${newUserChannel.name}\n\n**Member List for "${newUserChannel.name}"**\n${currentMember.join("\n")}`
+                    value: `has joined ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${currentMember.join("\n")}`
                 }
             ]
         }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
@@ -48,7 +48,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has left ${oldUserChannel.name}\n\n**Member List for "${oldUserChannel.name}"**\n${currentMember ? currentMember.join("\n") : "(None)"}`
+                        value: `has left ${oldUserChannel.name}\n\n**Member List for ${oldUserChannel.name}**\n${currentMember ? currentMember.join("\n") : "(None)"}`
                     }
                 ]
             }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
@@ -60,7 +60,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has left ${oldUserChannel.name}\n\n**Member List for "${oldUserChannel.name}"**\n${currentMember ? currentMember.join("\n") : "(None)"}`
+                        value: `has left ${oldUserChannel.name}\n\n**Member List for ${oldUserChannel.name}**\n${currentMember ? currentMember.join("\n") : "(None)"}`
                     }
                 ]
             }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
@@ -183,7 +183,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for "${newUserChannel.name}"**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for "${oldUserChannel.name}"**\n${oldChannelCurrentMember ? oldChannelCurrentMember.join("\n") : "(None)"}`
+                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for ${oldUserChannel.name}**\n${oldChannelCurrentMember ? oldChannelCurrentMember.join("\n") : "(None)"}`
                     }
                 ]
             }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
@@ -199,7 +199,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                 fields: [
                     {
                         name: `${memberUsername}`,
-                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for "${newUserChannel.name}"**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for "${oldUserChannel.name}"**\n${oldChannelCurrentMember ? oldChannelCurrentMember.join("\n") : "(None)"}`
+                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for ${oldUserChannel.name}**\n${oldChannelCurrentMember ? oldChannelCurrentMember.join("\n") : "(None)"}`
                     }
                 ]
             }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
