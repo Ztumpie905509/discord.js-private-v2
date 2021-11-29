@@ -167,8 +167,8 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             newChannelCurrentMember.push(user.user.tag)
         })
         var memberListMessage = ""
-        if (currentMember.length)
-            memberListMessage = currentMember.join("\n")
+        if (oldChannelCurrentMember.length)
+            memberListMessage = oldChannelCurrentMember.join("\n")
         else memberListMessage = "(None)"
         var currentMembersEmbed = new MessageEmbed({
             color: 15844367,
