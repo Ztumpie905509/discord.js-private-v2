@@ -37,35 +37,25 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
         sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
-        try {
-            var currentMember = []
-            oldUserChannel.members.each((user) => {
-                currentMember.push(user.user.tag)
-            })
-            var currentMembersEmbed = new MessageEmbed({
-                color: 15158332,
-                description: "Someone left a channel.",
-                fields: [
-                    {
-                        name: `${memberUsername}`,
-                        value: `has left ${oldUserChannel.name}\n\n**Member List for ${oldUserChannel.name}**\n${currentMember ? currentMember.join("\n") : "(None)"}`
-                    }
-                ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
-            sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
-        } catch (err) {
-            var currentMembersEmbed = new MessageEmbed({
-                color: 15158332,
-                description: "Someone left a channel.",
-                fields: [
-                    {
-                        name: `${memberUsername}`,
-                        value: `has left ${oldUserChannel.name}\n\n**Member List for ${oldUserChannel.name}**\n${currentMember ? currentMember.join("\n") : "(None)"}`
-                    }
-                ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
-            sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
-        }
+        var currentMember = []
+        oldUserChannel.members.each((user) => {
+            currentMember.push(user.user.tag)
+        })
+        var memberListMessage = ""
+        if (!currentMember.length(0))
+            memberListMessage = currentMember.join("\n")
+        else memberListMessage = "(None)"
+        var currentMembersEmbed = new MessageEmbed({
+            color: 15158332,
+            description: "Someone left a channel.",
+            fields: [
+                {
+                    name: `${memberUsername}`,
+                    value: `has left ${oldUserChannel.name}\n\n**Member List for ${oldUserChannel.name}**\n${memberListMessage}`
+                }
+            ]
+        }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+        sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         if (!oldMember.selfDeaf && newMember.selfDeaf) {
             var currentMembersEmbed = new MessageEmbed({
@@ -168,43 +158,29 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
-        try {
-            var oldChannelCurrentMember = []
-            oldUserChannel.members.each((user) => {
-                oldChannelCurrentMember.push(user.user.tag)
-            })
-            var newChannelCurrentMember = []
-            newUserChannel.members.each((user) => {
-                newChannelCurrentMember.push(user.user.tag)
-            })
-            var currentMembersEmbed = new MessageEmbed({
-                color: 15844367,
-                description: "Someone moved from a channel to another.",
-                fields: [
-                    {
-                        name: `${memberUsername}`,
-                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for ${oldUserChannel.name}**\n${oldChannelCurrentMember ? oldChannelCurrentMember.join("\n") : "(None)"}`
-                    }
-                ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
-            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
-        } catch (err) {
-            var newChannelCurrentMember = []
-            newUserChannel.members.each((user) => {
-                newChannelCurrentMember.push(user.user.tag)
-            })
-            var currentMembersEmbed = new MessageEmbed({
-                color: 15844367,
-                description: "Someone moved from a channel to another.",
-                fields: [
-                    {
-                        name: `${memberUsername}`,
-                        value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for ${oldUserChannel.name}**\n${oldChannelCurrentMember ? oldChannelCurrentMember.join("\n") : "(None)"}`
-                    }
-                ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
-            sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
-        }
+        var oldChannelCurrentMember = []
+        oldUserChannel.members.each((user) => {
+            oldChannelCurrentMember.push(user.user.tag)
+        })
+        var newChannelCurrentMember = []
+        newUserChannel.members.each((user) => {
+            newChannelCurrentMember.push(user.user.tag)
+        })
+        var memberListMessage = ""
+        if (!currentMember.length(0))
+            memberListMessage = currentMember.join("\n")
+        else memberListMessage = "(None)"
+        var currentMembersEmbed = new MessageEmbed({
+            color: 15844367,
+            description: "Someone moved from a channel to another.",
+            fields: [
+                {
+                    name: `${memberUsername}`,
+                    value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for ${oldUserChannel.name}**\n${memberListMessage}`
+                }
+            ]
+        }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+        sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
     }
 })
 var timeout
