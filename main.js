@@ -201,7 +201,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 client.login(process.env.TOKEN);
 client.on("message", (message) => {
     var channelID = "811986481089347655"
-    if (message.channel.id !== channelID) return
+    if (message.channel.id !== channelID || message.author.bot) return
     if (!message.attachments.size) {
         message.channel.send(`Dear <@${message.author.id}>:\n\nThis is an image only channel, please send images only.\nThank you for your cooperation!\n\Mokyuu~`)
         message.delete()
