@@ -203,7 +203,11 @@ client.on("message", (message) => {
     var channelID = "811986481089347655"
     if (message.channel.id !== channelID || message.author.bot) return
     if (!message.attachments.size) {
-        message.channel.send(`Dear <@${message.author.id}>:\n\nThis is an image only channel, please send images only.\nThank you for your cooperation!\n\Mokyuu~`)
+        message.channel.send(`Dear <@${message.author.id}>,\n\nThis is an image only channel, please send images only.\nThank you for your cooperation!\n\nMokyuu~`).then((m) => {
+            setTimeout(() => {
+                m.delete()
+            }, 15000)
+        })
         message.delete()
     }
 })
