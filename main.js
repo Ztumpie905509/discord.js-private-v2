@@ -199,7 +199,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         }
 })
 client.login(process.env.TOKEN);
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
     var channelID = "811986481089347655"
     if (message.channel.id !== channelID || message.author.bot) return
     if (!message.attachments.size) {
