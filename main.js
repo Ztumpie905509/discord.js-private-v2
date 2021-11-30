@@ -199,3 +199,11 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         }
 })
 client.login(process.env.TOKEN);
+client.on("message", (message) => {
+    channelID = "811986481089347655"
+    if (message.channel.id !== channelID) return
+    if (!message.attachments.size) {
+        message.channel.send(`Dear ${message.author.username}:\nThis is an image only channel, please send images only.\nThank you for your cooperation!\n\Mokyuu~`)
+        message.delete()
+    }
+})
