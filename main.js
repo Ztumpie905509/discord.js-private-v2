@@ -34,7 +34,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     value: `has joined ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${currentMember.join("\n")}`
                 }
             ]
-        }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+        }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
         sendEmbed(newUserChannel.guildId, logChannel, embed)
     } else if (oldUserChannel !== null && newUserChannel === null) {
         var currentMember = []
@@ -54,7 +54,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     value: `has left ${oldUserChannel.name}\n\n**Member List for ${oldUserChannel.name}**\n${memberListMessage}`
                 }
             ]
-        }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+        }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
         sendEmbed(oldUserChannel.guildId, logChannel, currentMembersEmbed)
     } else if (oldUserChannel === newUserChannel && oldUserChannel !== null && newUserChannel !== null) {
         if (!oldMember.selfDeaf && newMember.selfDeaf) {
@@ -67,7 +67,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has deafened himself/herself.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfDeaf && !newMember.selfDeaf) {
             var currentMembersEmbed = new MessageEmbed({
@@ -79,7 +79,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has undeafened himself/herself.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.selfMute && newMember.selfMute) {
@@ -92,7 +92,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has muted himself/herself.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.selfMute && !newMember.selfMute) {
             var currentMembersEmbed = new MessageEmbed({
@@ -104,7 +104,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `has unmuted himself/herself.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.serverDeaf && newMember.serverDeaf) {
@@ -117,7 +117,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being deafened.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverDeaf && !newMember.serverDeaf) {
             var currentMembersEmbed = new MessageEmbed({
@@ -129,7 +129,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being undeafened.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
         if (!oldMember.serverMute && newMember.serverMute) {
@@ -142,7 +142,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being muted.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         } else if (oldMember.serverMute && !newMember.serverMute) {
             var currentMembersEmbed = new MessageEmbed({
@@ -154,7 +154,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                         value: `was being unmuted.`
                     }
                 ]
-            }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+            }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
             sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
         }
     } else if (oldUserChannel !== null && newUserChannel !== null && oldUserChannel !== newUserChannel) {
@@ -179,7 +179,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
                     value: `has moved from ${oldUserChannel.name} to ${newUserChannel.name}\n\n**Member List for ${newUserChannel.name}**\n${newChannelCurrentMember.join("\n")}\n\n**Member List for ${oldUserChannel.name}**\n${memberListMessage}`
                 }
             ]
-        }).setFooter(`Date (DD/MM/YYYY): ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
+        }).setFooter(`Timestamp: ${new Date().toLocaleString("en-UK", { timeZone: "Asia/Hong_Kong" })}`)
         sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
     }
 })
