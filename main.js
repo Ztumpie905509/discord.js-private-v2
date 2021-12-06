@@ -199,7 +199,6 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             clearTimeout(timeout)
         }
 })
-client.login(process.env.TOKEN);
 client.on("messageCreate", (message) => {
     var channelID = "811986481089347655"
     if (message.channel.id !== channelID || message.author.bot) return
@@ -212,3 +211,25 @@ client.on("messageCreate", (message) => {
         message.delete()
     }
 })
+function getUserFromMentions(mention) {
+    if (!mention) return
+    if (mention.startWith("<@") && mention.endsWith(">")) {
+        mention = mention.slice(2, -1)
+        if (mention.startsWith("!"))
+            mention = mention.slice(1)
+        return client.users.cache.get(mention)
+    }
+}
+client.on("message", (message) => {
+    var moveToChannel = "807881572258021377"
+    var args = message.content.split(" ")
+    if (!message.author.id === "397057439725518859") return
+    if (args[0] === "+move") {
+        var membersToGet = []
+        for (let i = 1; i < args.length; i++)
+            membersToGet[i - 1] = getUserFromMentions(args[i])
+        for (let i = 0; i < membersToGet.length; i++)
+            membersToGet[i].voice.setChannel(moveToChannel)
+    }
+})
+client.login(process.env.TOKEN);
