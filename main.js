@@ -213,10 +213,9 @@ client.on("messageCreate", (message) => {
 })
 client.on("messageCreate", (message) => {
     var moveToChannel = "807881572258021377"
-    var args = message.content.split(" ")
     if (!message.author.id === "397057439725518859") return
     if (!message.mentions) return
-    if (args[0] === "+move")
+    if (message.content.startsWith("+move"))
         message.mentions.members.each((member) => {
             member.voice.setChannel(moveToChannel)
         })
