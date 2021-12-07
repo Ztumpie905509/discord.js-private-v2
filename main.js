@@ -211,22 +211,14 @@ client.on("messageCreate", (message) => {
         message.delete()
     }
 })
-function getUserFromMentions(mention) {
-    if (!mention) return
-    if (mention.startsWith("<@") && mention.endsWith(">")) {
-        mention = mention.slice(2, -1)
-        if (mention.startsWith("!"))
-            mention = mention.slice(1)
-        return client.users.cache.get(mention)
-    }
-}
 client.on("messageCreate", (message) => {
     var moveToChannel = "807881572258021377"
     var args = message.content.split(" ")
-    message.member.voice.setChannel()
     if (!message.author.id === "397057439725518859") return
+    if (!message.mentions) return
     if (args[0] === "+move")
-        for (let i = 1; i < args.length; i++)
-            getUserFromMentions(args[i]).voice.setChannel(moveToChannel)
+        message.mentions.members.each((member) => {
+            member.voice.setChannel(moveToChannel)
+        })
 })
 client.login(process.env.TOKEN);
