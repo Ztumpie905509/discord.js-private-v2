@@ -220,16 +220,13 @@ function getUserFromMentions(mention) {
         return client.users.cache.get(mention)
     }
 }
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
     var moveToChannel = "807881572258021377"
     var args = message.content.split(" ")
+    message.member.voice.setChannel()
     if (!message.author.id === "397057439725518859") return
-    if (args[0] === "+move") {
-        var membersToGet = []
+    if (args[0] === "+move")
         for (let i = 1; i < args.length; i++)
-            membersToGet[i - 1] = getUserFromMentions(args[i])
-        for (let i = 0; i < membersToGet.length; i++)
-            membersToGet[i].voice.setChannel(moveToChannel)
-    }
+            getUserFromMentions(args[i]).voice.setChannel(moveToChannel)
 })
 client.login(process.env.TOKEN);
