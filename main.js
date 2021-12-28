@@ -1,5 +1,5 @@
 import { Client, Intents, MessageEmbed } from "discord.js"
-import { clientB } from "./alt-main"
+import { clientB } from "./alt-main.js"
 clientB.on('ready', () => {
     console.log(`Logged in as ${clientB.user.tag}!`)
 })
