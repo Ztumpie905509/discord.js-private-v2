@@ -5,9 +5,6 @@ function sendEmbed(guildID, logChannel, embed) {
     })
 }
 const clientB = new Client({ intents: Object.values(Intents.FLAGS) })
-clientB.on("ready", () => {
-    console.log("Alt account also ready.")
-})
 clientB.on('error', (err) => {
     console.log(err)
 })

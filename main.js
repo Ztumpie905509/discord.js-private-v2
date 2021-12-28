@@ -1,5 +1,8 @@
-import * as alt_account from "./alt-main"
 import { Client, Intents, MessageEmbed } from "discord.js"
+import { clientB } from "./alt-main"
+clientB.on('ready', () => {
+    console.log(`Logged in as ${clientB.user.tag}!`)
+})
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {
         guild.channels.cache.get(logChannel).send({ embeds: [embed] })
