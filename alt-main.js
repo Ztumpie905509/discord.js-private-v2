@@ -1,22 +1,10 @@
-require("./alt-main")
-import { Client, Intents, MessageEmbed } from "discord.js";
-function sendEmbed(guildID, logChannel, embed) {
-    client.guilds.fetch(guildID).then((guild) => {
-        guild.channels.cache.get(logChannel).send({ embeds: [embed] })
-    })
-}
-const client = new Client({ intents: Object.values(Intents.FLAGS) });
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-});
-client.on('error', (err) => {
-    console.log(err)
+import { Client } from "discord.js"
+const clientB = new Client()
+clientB.on("ready", () => {
+    console.log("Alt account also ready.")
 })
-client.on('warn', (warn) => {
-    console.log(warn)
-})
-client.on('voiceStateUpdate', (oldMember, newMember) => {
-    var logChannel = "878928621148966932"
+clientB.on('voiceStateUpdate', (oldMember, newMember) => {
+    var logChannel = "925381565989650463"
     var newUserChannel = newMember.channel
     var oldUserChannel = oldMember.channel
     var member = newMember.member.user
@@ -184,41 +172,4 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         sendEmbed(newUserChannel.guildId, logChannel, currentMembersEmbed)
     }
 })
-var timeout
-client.on("voiceStateUpdate", async (oldState, newState) => {
-    var specialID = "337913859497132032"
-    var specialID2 = "403578324510572544"
-    var channel = "913112357100724244"
-    if (!oldState || !newState) return
-    if (newState.member.user.id === specialID || newState.member.user.id === specialID2)
-        if (newState.selfMute) {
-            var time = 15 * 60 * 1000
-            timeout = setTimeout(() => {
-                newState.setChannel(channel)
-            }, time)
-        } else if (!newState.selfMute) {
-            clearTimeout(timeout)
-        }
-})
-client.on("messageCreate", (message) => {
-    var channelID = "811986481089347655"
-    if (message.channel.id !== channelID || message.author.bot) return
-    if (!message.attachments.size) {
-        message.channel.send(`Dear <@${message.author.id}>,\n\nThis is an image only channel, please send images only.\nThank you for your cooperation!\n\nMokyuu~`).then((m) => {
-            setTimeout(() => {
-                m.delete()
-            }, 15000)
-        })
-        message.delete()
-    }
-})
-client.on("messageCreate", (message) => {
-    var moveToChannel = "807881572258021377"
-    if (!message.author.id === "397057439725518859") return
-    if (!message.mentions) return
-    if (message.content.startsWith("+move"))
-        message.mentions.members.each((member) => {
-            member.voice.setChannel(moveToChannel)
-        })
-})
-client.login(process.env.TOKEN);
+clientB.login(process.env.BOT_TOKEN_C)
