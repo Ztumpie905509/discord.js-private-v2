@@ -1,4 +1,4 @@
-require("./alt-main")
+import * as alt_account from "./alt-main"
 import { Client, Intents, MessageEmbed } from "discord.js"
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {

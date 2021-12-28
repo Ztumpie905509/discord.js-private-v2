@@ -184,3 +184,4 @@ clientB.on('voiceStateUpdate', (oldMember, newMember) => {
     }
 })
 clientB.login(process.env.BOT_TOKEN_C)
+export { clientB }
