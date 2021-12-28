@@ -1,14 +1,14 @@
 require("./alt-main")
-import { Client, Intents, MessageEmbed } from "discord.js";
+import { Client, Intents, MessageEmbed } from "discord.js"
 function sendEmbed(guildID, logChannel, embed) {
     client.guilds.fetch(guildID).then((guild) => {
         guild.channels.cache.get(logChannel).send({ embeds: [embed] })
     })
 }
-const client = new Client({ intents: Object.values(Intents.FLAGS) });
+const client = new Client({ intents: Object.values(Intents.FLAGS) })
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-});
+    console.log(`Logged in as ${client.user.tag}!`)
+})
 client.on('error', (err) => {
     console.log(err)
 })
@@ -221,4 +221,4 @@ client.on("messageCreate", (message) => {
             member.voice.setChannel(moveToChannel)
         })
 })
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)

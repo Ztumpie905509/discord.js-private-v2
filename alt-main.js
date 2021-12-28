@@ -1,7 +1,18 @@
-import { Client } from "discord.js"
-const clientB = new Client()
+import { Client, Intents, MessageEmbed } from "discord.js"
+function sendEmbed(guildID, logChannel, embed) {
+    client.guilds.fetch(guildID).then((guild) => {
+        guild.channels.cache.get(logChannel).send({ embeds: [embed] })
+    })
+}
+const clientB = new Client({ intents: Object.values(Intents.FLAGS) })
 clientB.on("ready", () => {
     console.log("Alt account also ready.")
+})
+clientB.on('error', (err) => {
+    console.log(err)
+})
+clientB.on('warn', (warn) => {
+    console.log(warn)
 })
 clientB.on('voiceStateUpdate', (oldMember, newMember) => {
     var logChannel = "925381565989650463"
